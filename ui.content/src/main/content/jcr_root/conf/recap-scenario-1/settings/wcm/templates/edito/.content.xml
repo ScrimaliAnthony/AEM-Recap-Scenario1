@@ -2,11 +2,11 @@
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
     jcr:primaryType="cq:Template">
     <jcr:content
-        cq:lastModified="{Date}2026-07-18T00:09:58.317+02:00"
+        cq:lastModified="{Date}2026-07-18T00:07:37.213+02:00"
         cq:lastModifiedBy="admin"
-        cq:templateType="/conf/recap-scenario-1/settings/wcm/template-types/page"
-        jcr:description="My Site Page Template"
+        cq:templateType="/conf/recap-scenario-1/settings/wcm/template-types/base-page"
+        jcr:description="Create an editorial page"
         jcr:primaryType="cq:PageContent"
-        jcr:title="Content Page"
-        status="disabled"/>
+        jcr:title="Edito"
+        status="enabled"/>
 </jcr:root>
