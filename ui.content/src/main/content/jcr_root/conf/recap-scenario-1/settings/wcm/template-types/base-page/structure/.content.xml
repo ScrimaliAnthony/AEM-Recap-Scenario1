@@ -3,7 +3,6 @@
     jcr:primaryType="cq:Page">
     <jcr:content
         cq:deviceGroups="[mobile/groups/responsive]"
-        cq:template="/conf/recap-scenario-1/settings/wcm/templates/page-content"
         jcr:primaryType="cq:PageContent"
         sling:resourceType="recap-scenario-1/components/page">
         <root
