@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/recap-scenario-1" mode="merge"/>
+    <filter root="/content/recap-scenario-1" mode="merge"/>
+    <filter root="/content/dam/recap-scenario-1" mode="merge">
+        <exclude pattern="/content/dam/recap-scenario-1(/.*)?"/>
+        <include pattern="/content/dam/recap-scenario-1/jcr:content(/.*)?"/>
+    </filter>
+    <filter root="/content/dam/recap-scenario-1/asset.jpg" mode="merge"/>
+    <filter root="/content/experience-fragments/recap-scenario-1" mode="merge"/>
+</workspaceFilter>
