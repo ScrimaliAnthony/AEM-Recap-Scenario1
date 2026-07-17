@@ -1,124 +1,167 @@
-# Sample AEM project template
+# AEM AD0-E128 — Projet de récapitulatif transversal
 
-This is a project template for AEM-based applications. It is intended as a best-practice set of examples as well as a potential starting point to develop your own functionality.
+Projet personnel de préparation à la certification **Adobe Experience Manager Sites Developer Professional AD0-E128**.
 
-## Modules
+L’objectif est de reconstruire, dans un projet AEM neuf, les principales briques de développement étudiées pendant la formation : templates, policies, composants, HTL, Sling Models, services OSGi, client libraries et Style System.
 
-The main parts of the template are:
+> Ce dépôt correspond à un exercice personnel réalisé à partir d’un scénario entièrement fictif.
+> Il ne contient aucun code, contenu, identifiant ou élément provenant d’un projet client ou employeur.
 
-* [core:](core/README.md) Java bundle containing all core functionality like OSGi services, listeners or schedulers, as well as component-related Java code such as servlets or request filters.
-* [it.tests:](it.tests/README.md) Java based integration tests
-* [ui.apps:](ui.apps/README.md) contains the /apps (and /etc) parts of the project, ie JS&CSS clientlibs, components, and templates
-* [ui.content:](ui.content/README.md) contains sample content using the components from the ui.apps
-* ui.config: contains runmode specific OSGi configs for the project
-* [ui.frontend:](ui.frontend.general/README.md) an optional dedicated front-end build mechanism (Angular, React or general Webpack project)
-* [ui.tests:](ui.tests/README.md) Cypress based UI tests (for other frameworks check [aem-test-samples](https://github.com/adobe/aem-test-samples) repository
-* all: a single content package that embeds all of the compiled modules (bundles and content packages) including any vendor dependencies
-* analyse: this module runs analysis on the project which provides additional validation for deploying into AEMaaCS
+## Scénario
 
-## How to build
+L’entreprise fictive **Aurelia** souhaite créer un site AEM destiné à présenter ses services aux professionnels.
 
-To build all the modules run in the project root directory the following command with Maven 3:
+Le site doit initialement proposer deux types de pages :
 
-    mvn clean install
+### Pages éditoriales
 
-To build all the modules and deploy the `all` package to a local instance of AEM, run in the project root directory the following command:
+Ces pages servent à publier des articles et des actualités.
 
-    mvn clean install -PautoInstallSinglePackage
+Chaque nouvelle page doit proposer une structure éditoriale cohérente, avec certains contenus présents dès sa création. Les auteurs peuvent ensuite enrichir le contenu avec une sélection contrôlée de composants.
 
-Or to deploy it to a publish instance, run
+### Pages de campagne
 
-    mvn clean install -PautoInstallSinglePackagePublish
+Ces pages servent à présenter des offres ponctuelles.
 
-Or alternatively
+Le contenu central est initialement vide afin de permettre des compositions plus libres, tout en limitant les auteurs à une liste de composants validés.
 
-    mvn clean install -PautoInstallSinglePackage -Daem.port=4503
+### Structure commune
 
-Or to deploy only the bundle to the author, run
+Toutes les pages possèdent :
 
-    mvn clean install -PautoInstallBundle
+* un en-tête imposé ;
+* un pied de page imposé ;
+* une zone centrale éditable ;
+* des règles de composants autorisés adaptées au type de page.
 
-Or to deploy only a single content package, run in the sub-module directory (i.e `ui.apps`)
+Le projet doit être entièrement reproductible à partir de Git.
 
-    mvn clean install -PautoInstallPackage
+## Méthode de travail
 
-## Documentation
+Le projet est réalisé sous la forme d’un exercice semi-guidé.
 
-The build process also generates documentation in the form of README.md files in each module directory for easy reference. Depending on the options you select at build time, the content may be customized to your project.
+Pour chaque évolution :
 
-## Testing
+1. un besoin fonctionnel est présenté ;
+2. une proposition d’architecture AEM est formulée ;
+3. la proposition est validée ou corrigée ;
+4. l’intégration est réalisée de manière autonome ;
+5. le code et le résultat obtenu dans AEM sont revus ;
+6. une aide progressive est fournie uniquement en cas de blocage.
 
-There are three levels of testing contained in the project:
+Les solutions ne sont donc pas fournies à l’avance. Chaque mécanisme AEM doit être justifié par le besoin fonctionnel.
 
-### Unit tests
+## Compétences travaillées
 
-This show-cases classic unit testing of the code contained in the bundle. To
-test, execute:
+Le projet doit progressivement mobiliser :
 
-    mvn clean test
+* l’AEM Project Archetype et la structure Maven ;
+* les modules `core`, `ui.apps`, `ui.content`, `ui.config` et `ui.frontend` ;
+* les Template Types ;
+* les Editable Templates ;
+* la structure et le contenu initial des templates ;
+* les content policies ;
+* les composants autorisés ;
+* les Core Components ;
+* les Proxy Components ;
+* les composants custom ;
+* les dialogs et configurations d’édition ;
+* HTL ;
+* les Sling Models ;
+* les injections Sling Models ;
+* le Sling Delegation Pattern ;
+* les services OSGi ;
+* les tests unitaires et AEM Mocks ;
+* les Client Libraries ;
+* le chargement des ressources front-end ;
+* le Style System ;
+* le build et l’installation sur une instance AEM locale.
 
-### Integration tests
+## Répartition du travail
 
-This allows running integration tests that exercise the capabilities of AEM via
-HTTP calls to its API. To run the integration tests, run:
+Le code spécifique à AEM est réalisé dans le cadre de l’exercice :
 
-    mvn clean verify -Plocal
+* XML FileVault et JCR ;
+* définitions de composants ;
+* dialogs ;
+* HTL ;
+* Sling Models ;
+* services OSGi ;
+* configurations AEM ;
+* tests AEM.
 
-Test classes must be saved in the `src/main/java` directory (or any of its
-subdirectories), and must be contained in files matching the pattern `*IT.java`.
+Le CSS, le SCSS, le JavaScript et le TypeScript ne constituent pas l’objet principal de l’exercice. Ils peuvent être générés séparément lorsque leur intégration devient nécessaire.
 
-The configuration provides sensible defaults for a typical local installation of
-AEM. If you want to point the integration tests to different AEM author and
-publish instances, you can use the following system properties via Maven's `-D`
-flag.
+La décision d’utiliser une clientlib, une variante de style ou un comportement JavaScript reste néanmoins une décision d’architecture AEM à justifier.
 
-| Property              | Description                                         | Default value           |
-|-----------------------|-----------------------------------------------------|-------------------------|
-| `it.author.url`       | URL of the author instance                          | `http://localhost:4502` |
-| `it.author.user`      | Admin user for the author instance                  | `admin`                 |
-| `it.author.password`  | Password of the admin user for the author instance  | `admin`                 |
-| `it.publish.url`      | URL of the publish instance                         | `http://localhost:4503` |
-| `it.publish.user`     | Admin user for the publish instance                 | `admin`                 |
-| `it.publish.password` | Password of the admin user for the publish instance | `admin`                 |
+## Modules principaux
 
-The integration tests in this archetype use the [AEM Testing
-Clients](https://github.com/adobe/aem-testing-clients) and showcase some
-recommended [best
-practices](https://github.com/adobe/aem-testing-clients/wiki/Best-practices) to
-be put in use when writing integration tests for AEM.
+* `core` : Sling Models, services OSGi et tests Java ;
+* `ui.apps` : composants, dialogs, HTL, proxies et clientlibs installés sous `/apps` ;
+* `ui.content` : templates, policies et contenu initial sous `/conf` et `/content` ;
+* `ui.config` : configurations OSGi ;
+* `ui.frontend` : sources SCSS, JavaScript et TypeScript ;
+* `dispatcher` : configuration Dispatcher ;
+* `all` : package global d’installation.
 
-## Static Analysis
+## Construction du projet
 
-The `analyse` module performs static analysis on the project for deploying into AEMaaCS. It is automatically
-run when executing
+Construire l’ensemble du projet :
 
-    mvn clean install
+```bash
+mvn clean install
+```
 
-from the project root directory. Additional information about this analysis and how to further configure it
-can be found here https://github.com/adobe/aemanalyser-maven-plugin
+Construire et installer le package global sur l’instance Author locale :
 
-### UI tests
+```bash
+mvn clean install -PautoInstallSinglePackage
+```
 
-They will test the UI layer of your AEM application using Cypress framework.
+Exécuter les tests du module Java :
 
-Check README file in `ui.tests` module for more details.
+```bash
+mvn test -pl core
+```
 
-Examples of UI tests in different frameworks can be found here: https://github.com/adobe/aem-test-samples
+Construire les ressources front-end :
 
-## ClientLibs
+```bash
+cd ui.frontend
+npm ci
+npm run prod
+```
 
-The frontend module is made available using an [AEM ClientLib](https://helpx.adobe.com/experience-manager/6-5/sites/developing/using/clientlibs.html). When executing the NPM build script, the app is built and the [`aem-clientlib-generator`](https://github.com/wcm-io-frontend/aem-clientlib-generator) package takes the resulting build output and transforms it into such a ClientLib.
+## Prérequis
 
-A ClientLib will consist of the following files and directories:
+* une version compatible de Java ;
+* Maven ;
+* Node.js et npm ;
+* une instance locale du SDK AEM as a Cloud Service.
 
-- `css/`: CSS files which can be requested in the HTML
-- `css.txt` (tells AEM the order and names of files in `css/` so they can be merged)
-- `js/`: JavaScript files which can be requested in the HTML
-- `js.txt` (tells AEM the order and names of files in `js/` so they can be merged
-- `resources/`: Source maps, non-entrypoint code chunks (resulting from code splitting), static assets (e.g. icons), etc.
+Le SDK AEM, le Quickstart Jar, les Dispatcher Tools et les autres binaires propriétaires Adobe ne sont pas distribués dans ce dépôt.
 
-## Maven settings
+## Sécurité du dépôt
 
-The project comes with the auto-public repository configured. To setup the repository in your Maven settings, refer to:
+Les éléments suivants ne doivent jamais être versionnés :
 
-    http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html
+* mots de passe et jetons d’accès ;
+* clés privées et certificats ;
+* fichiers `.env` contenant des secrets ;
+* identifiants Cloud Manager ;
+* URLs ou configurations d’environnements professionnels ;
+* exports provenant de projets clients ;
+* contenus, assets ou documents confidentiels ;
+* binaires du SDK AEM.
+
+## Statut
+
+Projet éducatif en cours de développement.
+
+Aurelia est une entreprise fictive créée uniquement pour ce scénario.
+
+Ce projet n’est ni affilié ni approuvé par Adobe ou par un employeur.
+
+## Licence
+
+Ce projet conserve la licence Apache License 2.0 fournie avec l’AEM Project Archetype.
